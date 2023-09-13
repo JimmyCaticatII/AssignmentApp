@@ -32,7 +32,7 @@ const AssignmentList = () => {
   return (
     <View style={styles.container}>
       <AddAssignment tasks={tasks} setTasks={setTasks} />
-      // yung id dito, manggagaling siya dun sa AddAssignment.js newTask
+      {/* yung id dito, manggagaling siya dun sa AddAssignment.js newTask */}
       <FlatList
         data={tasks.sort((a, b) => {
           return b.id - a.id;
