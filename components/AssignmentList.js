@@ -33,7 +33,9 @@ const AssignmentList = () => {
     <View style={styles.container}>
       <AddAssignment tasks={tasks} setTasks={setTasks} />
       <FlatList
-        data={tasks}
+        data={tasks.sort((a, b) => {
+          return b.id - a.id;
+        })}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <AssignmentItem task={item} onDelete={() => deleteTask(item.id)} />
