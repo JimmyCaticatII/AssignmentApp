@@ -15,31 +15,31 @@ const AssignmentItem = ({ task, onDelete }) => {
   const [checkboxState, setCheckboxState] = useState(false);
 
   return (
-    <View style={styles.taskContainer}>
-      <TouchableOpacity>
-        <Text style={styles.taskText}>{task.text}</Text>
+    <View style={styles.container}>
+      <BouncyCheckbox
+        onPress={() => setCheckboxState(!checkboxState)}
+        isChecked={checkboxState}
+      />
+      <TouchableOpacity style={styles.taskContainer}>
+        <Text numberOfLines={1} ellipsizeMode="tail" style={styles.taskText}>
+          {task.text}
+        </Text>
       </TouchableOpacity>
-      <View style={styles.buttonGroup}>
-        <BouncyCheckbox
-          onPress={() => setCheckboxState(!checkboxState)}
-          isChecked={checkboxState}
-        />
-        <Pressable
-          onPress={() =>
-            Alert.alert("Are you sure?", "", [
-              {
-                text: "Cancel",
-              },
-              {
-                text: "OK",
-                onPress: onDelete,
-              },
-            ])
-          }
-        >
-          <Image source={deleteImage} style={styles.imageContainer}></Image>
-        </Pressable>
-      </View>
+      <Pressable
+        onPress={() =>
+          Alert.alert("Are you sure?", "", [
+            {
+              text: "Cancel",
+            },
+            {
+              text: "OK",
+              onPress: onDelete,
+            },
+          ])
+        }
+      >
+        <Image source={deleteImage} style={styles.imageContainer}></Image>
+      </Pressable>
     </View>
   );
 };
@@ -47,14 +47,15 @@ const AssignmentItem = ({ task, onDelete }) => {
 export default AssignmentItem;
 
 const styles = StyleSheet.create({
-  taskContainer: {
+  container: {
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+  },
+  taskContainer: {
     padding: 10,
     marginVertical: 5,
     backgroundColor: "#f5f5f5",
     borderRadius: 8,
+    width: "80%",
   },
   taskText: {
     flex: 1,
@@ -67,10 +68,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     width: 36,
     height: 36,
-    marginStart: 10,
-  },
-  buttonGroup: {
-    flexDirection: "row",
+    margin: 10,
   },
   checkbox: {
     padding: 6,
