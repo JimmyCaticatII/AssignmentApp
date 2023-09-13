@@ -1,5 +1,5 @@
 import {
-  Button,
+  Alert,
   Pressable,
   StyleSheet,
   Text,
@@ -17,7 +17,20 @@ const AssignmentItem = ({ task, onDelete }) => {
       <TouchableOpacity>
         <Text style={styles.taskText}>{task.text}</Text>
       </TouchableOpacity>
-      <Pressable onPress={onDelete}>
+      <Pressable
+        onPress={() =>
+          Alert.alert("Are you sure?", "", [
+            {
+              text: "Cancel",
+              onPress: () => console.log("canceled"),
+            },
+            {
+              text: "OK",
+              onPress: onDelete,
+            },
+          ])
+        }
+      >
         <Image source={deleteImage} style={styles.imageContainer}></Image>
       </Pressable>
     </View>
@@ -33,7 +46,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     padding: 10,
     marginVertical: 5,
-    backgroundColor: "#fff",
+    backgroundColor: "#f5f5f5",
     borderRadius: 8,
   },
   taskText: {

@@ -1,37 +1,15 @@
-import {
-  Button,
-  FlatList,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { FlatList, View, StyleSheet } from "react-native";
 import React, { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AssignmentItem from "./AssignmentItem";
-import styles from "../styles/AssignmentListStyle";
+import AddAssignment from "./AddAssignment";
 
 const AssignmentList = () => {
-  const [task, setTask] = useState("");
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
     loadTask();
   }, []);
-
-  const saveTask = async () => {
-    if (task.trim() === "") {
-      return;
-    }
-
-    const newTask = { id: Date.now().toString(), text: task };
-    const updatedTasks = [...tasks, newTask];
-    setTasks(updatedTasks);
-
-    await AsyncStorage.setItem("tasks", JSON.stringify(updatedTasks));
-
-    setTask("");
-  };
 
   const loadTask = async () => {
     try {
@@ -53,15 +31,7 @@ const AssignmentList = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Assignment List</Text>
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          value={task}
-          onChangeText={(text) => setTask(text)}
-        />
-        <Button title="Add Assignment" onPress={saveTask} />
-      </View>
+      <AddAssignment tasks={tasks} setTasks={setTasks} />
       <FlatList
         data={tasks}
         keyExtractor={(item) => item.id}
@@ -74,3 +44,5 @@ const AssignmentList = () => {
 };
 
 export default AssignmentList;
+
+const styles = StyleSheet.create({});

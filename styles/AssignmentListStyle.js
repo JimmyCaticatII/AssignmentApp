@@ -7,16 +7,11 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   header: {
-    fontSize: 24,
+    fontSize: 240,
     fontWeight: "bold",
     textAlign: "center",
     marginVertical: 20,
     color: "#fff",
-  },
-  inputContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 20,
   },
   input: {
     flex: 1,
